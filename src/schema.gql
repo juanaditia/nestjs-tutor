@@ -1,0 +1,26 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type FileKita {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  age: Int!
+  isPublished: Boolean!
+}
+
+type Query {
+  filekita: [FileKita!]!
+}
+
+type Mutation {
+  create(input: FileKitaDTO!): FileKita!
+}
+
+input FileKitaDTO {
+  firstName: String!
+  lastName: String!
+  age: Int!
+  isPublished: Boolean!
+}

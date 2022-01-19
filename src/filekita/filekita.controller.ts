@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Render } from '@nestjs/common';
 import { FilekitaService } from './filekita.service';
-import { FileKitaDTO } from './filekita.dto';
+import { FileKitaDTO } from './dto/create-filekita.input';
 
 @Controller('filekita')
 export class FilekitaController {
@@ -26,11 +26,6 @@ export class FilekitaController {
   lihatDetail(@Param('id') id: string ) {
     // return ' ini controller file kita by id : ' + id;
     return this.FilekitaService.showPreRecord(id)
-  }
-
-  @Get('service')
-  lihatSemua(){
-    return this.FilekitaService.lihatSemua();
   }
 
   // to show how works with show all data table
