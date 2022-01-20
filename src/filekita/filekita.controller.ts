@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Render } from '@nestjs/common';
 import { FilekitaService } from './filekita.service';
-import { FileKitaDTO } from './dto/create-filekita.input';
+import { FileKitaCreate } from './dto/create-filekita.input';
 
 @Controller('filekita')
 export class FilekitaController {
@@ -38,20 +38,20 @@ export class FilekitaController {
   // add data table
 
   @Post()
-  membuatRecord(@Body() data: FileKitaDTO){
+  membuatRecord(@Body() data: FileKitaCreate){
     return this.FilekitaService.create(data)
   }
 
   // update data table
 
   @Put(':id')
-  updateDetail(@Param('id') id: string, @Body() data: Partial<FileKitaDTO>){
+  updateDetail(@Param('id') id: string, @Body() data: Partial<FileKitaCreate>){
     return this.FilekitaService.update(id,data)
   }
 
-  @Delete(':id')
-  deleteRecord(@Param('id') id: string){
-    return this.FilekitaService.deleteData(id);
-  }
+  // @Delete(':id')
+  // deleteRecord(@Param('id') id: string){
+  //   return this.FilekitaService.deleteData(id);
+  // }
 
 }

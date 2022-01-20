@@ -1,5 +1,8 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { FileKitaDTO } from './dto/create-filekita.input';
+import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { User } from 'src/users/entities/user.entity';
+
+import { FileKitaCreate } from './dto/create-filekita.input';
+import { UpdateFilekia } from './dto/update-filekita.input';
 import { FileKita } from './entity/filekita.entity';
 import { FilekitaService } from './filekita.service';
 
@@ -13,7 +16,37 @@ export class FilekitaResolver {
   }
 
   @Mutation(() => FileKita)
-  async create(@Args('input') input: FileKitaDTO){
+  async createFilekita(@Args('input') input: FileKitaCreate){
     return this.fileKitaService.create(input);
+  }
+
+  @Mutation(() => FileKita)
+  async updateFilekita(
+    @Args('id',  {type: () => Int }) id: string,
+    @Args('input') input: UpdateFilekia,
+  ){
+    return this.fileKitaService.update(id,input);
+  }
+
+  // @Mutation(() => FileKita)
+  // async removeFilekita(@Args('id', { type: () => Int }) id: string) {
+  //    return this.fileKitaService.deleteData(id);
+  // }
+
+  @Mutation(() => FileKita)
+  async removeFilekita(@Args('id', {type: () => Int }) id: number) {
+    const user = this.fileKitaService.findOneData(id);
+    this.fileKitaService.deleteData(id);
+    return user;
+  }
+
+  @Query(() => FileKita)
+  getFilekita(@Args('id', { type: () => Int }) id: number) {
+    return this.fileKitaService.findOneData(id);
+  }
+
+  @ResolveField(() => User)
+  user(@Parent() filekita: FileKita) {
+    return this.fileKitaService.getUser(filekita.userId);
   }
 }

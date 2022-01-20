@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql'
+import { User } from 'src/users/entities/user.entity';
 
 @Entity()
 @ObjectType()
@@ -17,11 +18,19 @@ export class FileKita {
   lastName: string;
 
   @Column()
+  @Field()
+  age: string;
+
+  @Column()
   @Field(() => Int)
-  age: number;
+  userId: number;
 
   @Column()
   @Field()
   isPublished: boolean;
+
+  @ManyToOne(() => User, (user) => user.filekita)
+  @Field(() => User)
+  user: User;
 
 }

@@ -4,7 +4,7 @@ import { IsAlpha } from 'class-validator'
 
 
 @InputType()
-export class FileKitaDTO{
+export class FileKitaCreate{
   @IsAlpha()
   @Field()
   firstName: string;
@@ -12,8 +12,8 @@ export class FileKitaDTO{
   @Field()
   lastName: string;
 
-  @Field(() => Int)
-  age: number;
+  @Field()
+  age: string;
 
   @Field()
   isPublished: boolean;

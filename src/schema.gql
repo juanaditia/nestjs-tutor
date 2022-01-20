@@ -2,25 +2,73 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  filekita: [FileKita!]
+}
+
 type FileKita {
   id: ID!
   firstName: String!
   lastName: String!
-  age: Int!
+  age: String!
+  userId: Int!
   isPublished: Boolean!
+  user: User!
+}
+
+type Auth {
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
 
 type Query {
   filekita: [FileKita!]!
+  getFilekita(id: Int!): FileKita!
+  findAll: [User!]!
+  findOne(id: Int!): User!
+  getUser(id: Int!): User!
+  auth(id: Int!): Auth!
 }
 
 type Mutation {
-  create(input: FileKitaDTO!): FileKita!
+  createFilekita(input: FileKitaCreate!): FileKita!
+  updateFilekita(input: UpdateFilekia!, id: Int!): FileKita!
+  removeFilekita(id: Int!): FileKita!
+  createUser(createUserInput: CreateUserInput!): User!
+  createAuth(createAuthInput: CreateAuthInput!): Auth!
+  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  removeAuth(id: Int!): Auth!
 }
 
-input FileKitaDTO {
+input FileKitaCreate {
   firstName: String!
   lastName: String!
-  age: Int!
+  age: String!
   isPublished: Boolean!
+}
+
+input UpdateFilekia {
+  firstName: String
+  lastName: String
+  age: String
+  isPublished: Boolean
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+}
+
+input CreateAuthInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAuthInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
