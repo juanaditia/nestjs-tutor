@@ -41,12 +41,12 @@ export class FilekitaResolver {
   }
 
   @Query(() => FileKita)
-  getFilekita(@Args('id', { type: () => Int }) id: number) {
-    return this.fileKitaService.findOneData(id);
+  async getFilekita(@Args('id', { type: () => Int }) id: number) {
+    return await this.fileKitaService.findOneData(id);
   }
 
   @ResolveField(() => User)
-  user(@Parent() filekita: FileKita) {
-    return this.fileKitaService.getUser(filekita.userId);
+  async user(@Parent() filekita: FileKita) {
+    return await this.fileKitaService.getUser(filekita.userId);
   }
 }

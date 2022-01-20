@@ -6,7 +6,7 @@ type User {
   id: ID!
   username: String!
   password: String!
-  filekita: [FileKita!]
+  fileKita: [FileKita!]
 }
 
 type FileKita {
@@ -38,6 +38,8 @@ type Mutation {
   updateFilekita(input: UpdateFilekia!, id: Int!): FileKita!
   removeFilekita(id: Int!): FileKita!
   createUser(createUserInput: CreateUserInput!): User!
+  updateUser(id: Int!, updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
   createAuth(createAuthInput: CreateAuthInput!): Auth!
   updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
   removeAuth(id: Int!): Auth!
@@ -47,6 +49,7 @@ input FileKitaCreate {
   firstName: String!
   lastName: String!
   age: String!
+  userId: Int!
   isPublished: Boolean!
 }
 
@@ -54,12 +57,18 @@ input UpdateFilekia {
   firstName: String
   lastName: String
   age: String
+  userId: Int
   isPublished: Boolean
 }
 
 input CreateUserInput {
   username: String!
   password: String!
+}
+
+input UpdateUserInput {
+  username: String
+  password: String
 }
 
 input CreateAuthInput {

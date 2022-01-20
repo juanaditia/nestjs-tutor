@@ -15,6 +15,9 @@ export class FileKitaCreate{
   @Field()
   age: string;
 
+  @Field(() => Int)
+  userId: number;
+
   @Field()
   isPublished: boolean;
 

@@ -32,13 +32,13 @@ export class UsersService {
     return await this.usersRepository.findOneOrFail(id);
   }
 
-  // async update(id: number, updateUserInput: UpdateUserInput) {
-  //   const user = await this.usersRepository.findOneOrFail(id);
-  //   Object.assign(user, updateUserInput);
-  //   return await this.usersRepository.save(user);
-  // }
+  async update(id: number, updateUserInput: UpdateUserInput) {
+    const user = await this.usersRepository.findOneOrFail(id);
+    Object.assign(user, updateUserInput);
+    return await this.usersRepository.save(user);
+  }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} user`;
-  // }
+  async remove(id: number) {
+    return await this.usersRepository.delete(id);
+  }
 }

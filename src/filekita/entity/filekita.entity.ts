@@ -29,7 +29,7 @@ export class FileKita {
   @Field()
   isPublished: boolean;
 
-  @ManyToOne(() => User, (user) => user.filekita)
+  @ManyToOne(() => User, (user) => user.fileKita)
   @Field(() => User)
   user: User;
 

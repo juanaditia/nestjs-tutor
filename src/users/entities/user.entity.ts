@@ -20,5 +20,5 @@ export class User {
 
   @OneToMany(() => FileKita, (filekita) => filekita.user)
   @Field(() => [FileKita], { nullable: true })
-  filekita?: FileKita[];
+  fileKita?: FileKita[];
 }

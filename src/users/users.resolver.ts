@@ -23,15 +23,19 @@ export class UsersResolver {
     return await this.usersService.findOne(id);
   }
 
-  // @Mutation(() => User)
-  // async updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-  //   return await this.usersService.update(updateUserInput.id, updateUserInput);
-  // }
+  @Mutation(() => User)
+  async updateUser(
+    @Args('updateUserInput') updateUserInput: UpdateUserInput,
+    @Args('id',  {type: () => Int }) id: number,) {
+    return await this.usersService.update(id, updateUserInput);
+  }
 
-  // @Mutation(() => User)
-  // async removeUser(@Args('id', { type: () => Int }) id: number) {
-  //   return await this.usersService.remove(id);
-  // }
+  @Mutation(() => User)
+  async removeUser(@Args('id', { type: () => Int }) id: number) {
+    const user = this.usersService.findOne(id);
+     await this.usersService.remove(id);
+     return user
+  }
 
   @Query(() => User)
   async getUser(@Args('id', { type: () => Int }) id: number) {
@@ -39,7 +43,7 @@ export class UsersResolver {
   }
 
   @ResolveField()
-  async filekita(@Parent() user: User) {
+  async fileKita(@Parent() user: User) {
     return this.usersService.getFilekita(user.id);
   }
 
