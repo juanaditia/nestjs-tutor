@@ -39,7 +39,8 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(id: Int!, updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
-  login(LoginUserInput: LoginUserInput!): LoginResponse!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  signup(loginUserInput: LoginUserInput!): User!
 }
 
 input FileKitaCreate {
