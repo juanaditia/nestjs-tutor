@@ -3,6 +3,8 @@ import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt'
 import { LoginUserInput } from './dto/login-user.input';
+import * as bcrypt from 'bcrypt';
+
 
 @Injectable()
 export class AuthService {
@@ -15,7 +17,9 @@ export class AuthService {
   async validateUser(username: string, password: string): Promise<any>{
     const user = await this.usersService.findOneUsername(username);
 
-    if (user && user.password === password) {
+    const valid = await bcrypt.compare(password, user?.password);
+
+    if (user && valid) {
       const{ password, ...result } = user;
       return user;
     }
@@ -41,9 +45,10 @@ export class AuthService {
     if (user) {
       throw new Error('User already exists!');
     }
-
+    const password = await bcrypt.hash(loginUserInput.password, 10);  // bcrypt has password
     return this.usersService.create({
       ...loginUserInput,
+      password,
     });
   }
 
