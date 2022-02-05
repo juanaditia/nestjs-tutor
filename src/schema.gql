@@ -40,7 +40,7 @@ type Mutation {
   updateUser(id: Int!, updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
   login(loginUserInput: LoginUserInput!): LoginResponse!
-  signup(loginUserInput: LoginUserInput!): User!
+  signup(RegisterInput: RegisterInput!): User!
 }
 
 input FileKitaCreate {
@@ -70,6 +70,11 @@ input UpdateUserInput {
 }
 
 input LoginUserInput {
+  username: String!
+  password: String!
+}
+
+input RegisterInput {
   username: String!
   password: String!
 }

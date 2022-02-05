@@ -27,6 +27,7 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
+  @UseGuards(JwtAuthGuard)
   async updateUser(
     @Args('updateUserInput') updateUserInput: UpdateUserInput,
     @Args('id',  {type: () => Int }) id: number,) {
